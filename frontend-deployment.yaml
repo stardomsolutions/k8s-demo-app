@@ -1,0 +1,31 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demoapp-vote-front
+  namespace: {{ NAMESPACE }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demoapp-vote-front
+  template:
+    metadata:
+      labels:
+        app: demoapp-vote-front
+    spec:
+      containers:
+      - name: demoapp-vote-front
+        image: mcr.microsoft.com/demoappdocs/demoapp-vote-front:v1
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+        ports:
+        - containerPort: 80
+        env:
+        - name: REDIS
+          value: "demoapp-vote-back
