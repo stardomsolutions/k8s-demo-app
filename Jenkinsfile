@@ -1,9 +1,4 @@
 pipeline {
-
-  environment {
-    NAMESPACE = "demoapp"
-  }
-
   agent any
   parameters {
         string(name: "NAMESPACE", defaultValue: "default", description: "pass namespace name")
