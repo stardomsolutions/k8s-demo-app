@@ -5,14 +5,24 @@ pipeline {
   }
 
   agent any
+  parameters {
+        string(name: "NAMESPACE", defaultValue: "default", description: "pass namespace name")
+  }
   stages {
 
-    stage('Update NS Value') {
+    stage('checkout code') {
+          checkout scm
+    }
+    stage('Update NS Value - We can step here if we need to update docker imnage tag in future') {
       steps {
-        container('kubectl') {
           sh("sed -i 's#{{ NAMESPACE }}#${NAMESPACE}#' ./k8s-scripts/*.yaml")
-        }
       }
+    }
+    stage('Fetch K8S Creds') {
+           sh("echo 'Fecth K8S creds here'")
+    }
+    stage('Deploy to K8S') {
+           sh("echo 'Deploy to K8S cluster here'")
     }
 
   }
