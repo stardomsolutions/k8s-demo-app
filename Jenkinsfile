@@ -11,7 +11,9 @@ pipeline {
   stages {
 
     stage('checkout code') {
+      steps {
           checkout scm
+		  }
     }
     stage('Update NS Value - We can step here if we need to update docker imnage tag in future') {
       steps {
@@ -19,10 +21,14 @@ pipeline {
       }
     }
     stage('Fetch K8S Creds') {
+      steps {
            sh("echo 'Fecth K8S creds here'")
+		   }
     }
     stage('Deploy to K8S') {
+      steps {
            sh("echo 'Deploy to K8S cluster here'")
+		   }
     }
 
   }
